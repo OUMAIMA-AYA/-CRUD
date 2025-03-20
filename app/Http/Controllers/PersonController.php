@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Person;
 use Illuminate\Http\Request;
 
-use function Pest\Laravel\delete;
-
 class PersonController extends Controller
 {
     public function index(){
@@ -35,10 +33,28 @@ class PersonController extends Controller
         $person = Person::whereId($id)->first();
         return view ('show_person', compact('person'));
     }
-
+    
     public function delete ($id){
         $person = Person::find($id);
         $person->delete();
         return redirect('/');
+    }
+    public function edit($id){
+        $person = Person::whereId($id)->first();
+        return view ('edit_person', compact('person'));
+    }
+    public function update(Request $request, $id) {
+
+        $validateData = $request->validate([
+            'name' => 'required|max:50',
+            'age' => 'required|integer',
+            'gender' => 'required',
+            'work' => 'required|max:100',
+        ]);
+    
+        $person = Person::findOrFail($id); // Trouver la personne
+        $person->update($validateData); // Mettre à jour les données
+    
+        return redirect('/')->with('success', 'Person updated successfully');
     }
 }

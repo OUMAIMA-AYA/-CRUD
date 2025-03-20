@@ -12,3 +12,7 @@ Route::delete('/delete_person/{id}', [PersonController::class, 'delete'])->name(
 Route::get('/create_person', [PersonController::class, 'create'])->name('create_person'); // Affiche le formulaire
 
 Route::post('/store_person', [PersonController::class, 'store'])->name('store_person'); // Traite la création
+
+Route::get('/edit_person/{id}', [PersonController::class, 'edit'])->name('edit_person'); // Affiche le formulaire
+
+Route::put('/update_person/{id}', [PersonController::class, 'update'])->name('update_person'); // Traite la modification

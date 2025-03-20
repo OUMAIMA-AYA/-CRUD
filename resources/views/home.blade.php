@@ -16,6 +16,7 @@
             <th>gender</th>
             <th>work</th>
             <th>supprimer</th>
+            <th>edit</th>
         </tr>
         @foreach ($persons as $person)
         <tr>
@@ -31,6 +32,7 @@
                     <button type="submit">supprimer</button>
                 </form>
             </td>
+            <td><a href="/edit_person/{{$person->id}}">edit</a></td>
         </tr>
         @endforeach
     </table>
